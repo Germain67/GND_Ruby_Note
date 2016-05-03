@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title Mon Blog
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    = stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    = javascript_include_tag "//https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+  body
+    nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        a.navbar-brand href="#" 
+          = image_tag('icone_appli.png',size: "50")
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            li
+              = link_to('Logout', destroy_user_session_path, :method => :delete)
+          - else
+            li
+              = link_to('Login', new_user_session_path)
+    - if flash[:alert]
+      = flash[:alert]
+    .container
+      = yield

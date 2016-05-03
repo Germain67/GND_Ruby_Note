@@ -19,6 +19,12 @@ gem 'coffee-script-source', '1.10.0'
 # Use Twitter Bootstrap SASS
 gem 'bootstrap-sass'
 
+# Use this gem for authentification
+gem 'devise'
+
+# Use this gem for pretty devise forms
+gem 'devise-bootstrap-views'
+
 # Use slim in rails
 gem 'slim-rails'
 
