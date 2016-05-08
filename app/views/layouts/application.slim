@@ -3,24 +3,51 @@ html
   head
     title Mon Blog
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag    'simple-sidebar'
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     = stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     = javascript_include_tag "//https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
   body
-    nav.navbar.navbar-default
-      .container-fluid
-        .navbar-header
-          = image_tag('icone_appli.png',width: "55",height: "50", alt: "Logo")
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            - if user_signed_in?
-              li
-                = link_to('Logout', destroy_user_session_path, :method => :delete)
-            - else
-              li
-                = link_to('Login', new_user_session_path)
+    #wrapper
+      /! Sidebar
+      #sidebar-wrapper
+        ul.sidebar-nav
+          li.sidebar-brand
+            a href="/"
+              = image_tag('icone_appli.png',width: "55",height: "50", alt: "Logo")
+
+          - if user_signed_in?
+            li
+              = link_to('Déconnexion', destroy_user_session_path, :method => :delete)
+            li
+              a href="#"  Tableau de bord
+            li
+              a href="#"  Mes matières
+            li
+              a href="#"  Mes épreuves
+            li
+              a href="#"  Aide
+            li
+              a href="#"  Contact
+          - else
+            li
+              = link_to('Connexion', new_user_session_path)
+              = link_to('Inscription', '/users/sign_up')
+          
+      /! /#sidebar-wrapper
+      /! Page Content
+      #page-content-wrapper
+        .container-fluid
+          .row
+            .col-lg-6.col-lg-offset-3
+              = yield
+    javascript:
+      | $("#menu-toggle").click(function(e) {
+          | e.preventDefault();
+          | $("#wrapper").toggleClass("toggled");
+      | });
+            
     - if flash[:alert]
       = flash[:alert]
-    .container
-      = yield
+    
