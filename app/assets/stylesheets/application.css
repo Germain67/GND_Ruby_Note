@@ -18,3 +18,14 @@
 
 # LESS
 *= require devise_bootstrap_views_less
+
+ .float-none {
+  float: none;
+}
+
+.panel-heading {
+  padding: 15px;
+  h4 {
+    margin: 0px;
+  }
+}

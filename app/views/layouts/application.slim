@@ -9,6 +9,10 @@ html
     = stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     = javascript_include_tag "//https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
   body
+    - flash.each do |key, value|
+      div class=("alert alert-#{key} alert-dismissable") 
+        button.close aria-hidden="true" data-dismiss="alert" type="button"  ×
+        = value
     #wrapper
       /! Sidebar
       #sidebar-wrapper
@@ -47,7 +51,3 @@ html
           | e.preventDefault();
           | $("#wrapper").toggleClass("toggled");
       | });
-            
-    - if flash[:alert]
-      = flash[:alert]
-    
