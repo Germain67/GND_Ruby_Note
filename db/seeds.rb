@@ -9,3 +9,9 @@
 matieres = Matiere.create!([{titre: 'Maths', periode: Time.new(2002)}, {titre: 'Histoire', periode: Time.new(2002)}])
 Epreuve.create!(titre: 'controle1', date_examen: Date.new(2009,11,26), matiere: matieres.first)
 Epreuve.create!(titre: 'controle2', date_examen: Date.new(2019,11,26), matiere: matieres.first)
+
+user = User.new
+user.email = 'admin@admin.com'
+user.password = 'admin123'
+user.password_confirmation = 'admin123'
+user.save!

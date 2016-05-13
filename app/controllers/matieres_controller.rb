@@ -1,8 +1,10 @@
 class MatieresController < ApplicationController
   def index
+    @matieres = Matiere.all
   end
 
   def show
+    @matiere = Matiere.find(params[:id])
   end
 
   def new

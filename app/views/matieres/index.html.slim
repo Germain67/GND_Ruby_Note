@@ -1,2 +1,10 @@
-h1 Matieres#index
-p Find me in app/views/matieres/index.html.slim
+h1 Listing articles
+table
+  tr
+    th Title
+    th Text
+  - @matieres.each do |matiere|
+    tr
+      td= matiere.titre
+      td= matiere.periode
+
