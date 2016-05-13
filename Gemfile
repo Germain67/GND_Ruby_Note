@@ -18,7 +18,7 @@ gem 'coffee-script-source', '1.10.0'
 
 # Use Twitter Bootstrap SASS
 gem 'bootstrap-sass'
-
+gem "twitter-bootstrap-rails"
 # Use this gem for authentification
 gem 'devise'
 
