@@ -23,7 +23,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 
 # Checking authorizations
-gem 'CanCanCan'
+gem 'cancancan'
 
 # Handling roles
 gem 'rolify'
