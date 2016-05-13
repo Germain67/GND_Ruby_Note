@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-<<<<<<< Updated upstream
   get 'matieres/index'
 
   get 'matieres/show'
@@ -27,13 +26,6 @@ Rails.application.routes.draw do
   get 'epreuves/update'
 
   get 'epreuves/destroy'
-=======
-  get 'user/f1'
-
-  get 'user/f2'
-
-  get 'user/f3'
->>>>>>> Stashed changes
 
   devise_for :users
   get 'home/index'
