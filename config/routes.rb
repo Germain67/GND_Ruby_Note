@@ -1,4 +1,32 @@
 Rails.application.routes.draw do
+  get 'matieres/index'
+
+  get 'matieres/show'
+
+  get 'matieres/new'
+
+  get 'matieres/edit'
+
+  get 'matieres/create'
+
+  get 'matieres/update'
+
+  get 'matieres/destroy'
+
+  get 'epreuves/index'
+
+  get 'epreuves/show'
+
+  get 'epreuves/new'
+
+  get 'epreuves/edit'
+
+  get 'epreuves/create'
+
+  get 'epreuves/update'
+
+  get 'epreuves/destroy'
+
   devise_for :users
   get 'home/index'
 
