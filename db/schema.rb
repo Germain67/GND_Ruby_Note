@@ -27,9 +27,12 @@ ActiveRecord::Schema.define(version: 20160513142747) do
   add_index "epreuves", ["matiere_id"], name: "index_epreuves_on_matiere_id", using: :btree
 
   create_table "epreuves_users", id: false, force: :cascade do |t|
-    t.integer "epreuve_id", null: false
-    t.integer "user_id",    null: false
+    t.integer "epreuve_id"
+    t.integer "user_id"
   end
+
+  add_index "epreuves_users", ["epreuve_id"], name: "index_epreuves_users_on_epreuve_id", using: :btree
+  add_index "epreuves_users", ["user_id"], name: "index_epreuves_users_on_user_id", using: :btree
 
   create_table "matieres", force: :cascade do |t|
     t.string   "titre"
@@ -39,9 +42,12 @@ ActiveRecord::Schema.define(version: 20160513142747) do
   end
 
   create_table "matieres_users", id: false, force: :cascade do |t|
-    t.integer "matiere_id", null: false
-    t.integer "user_id",    null: false
+    t.integer "matiere_id"
+    t.integer "user_id"
   end
+
+  add_index "matieres_users", ["matiere_id"], name: "index_matieres_users_on_matiere_id", using: :btree
+  add_index "matieres_users", ["user_id"], name: "index_matieres_users_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -57,7 +63,6 @@ ActiveRecord::Schema.define(version: 20160513142747) do
   create_table "users", force: :cascade do |t|
     t.string   "nom"
     t.string   "prenom"
-    t.integer  "idRole"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

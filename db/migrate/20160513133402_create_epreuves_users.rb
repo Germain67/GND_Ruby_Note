@@ -1,9 +1,8 @@
 class CreateEpreuvesUsers < ActiveRecord::Migration
   def change
     create_table :epreuves_users, id: false do |t|
-      t.integer :epreuve_id
-      t.integer :user_id
+      t.belongs_to :epreuve, index: true
+      t.belongs_to :user, index: true
     end
-    execute "ALTER TABLE epreuves_users ADD PRIMARY KEY (epreuve_id, user_id);"
   end
 end

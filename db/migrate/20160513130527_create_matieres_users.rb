@@ -1,9 +1,8 @@
 class CreateMatieresUsers < ActiveRecord::Migration
   def change
     create_table :matieres_users, id: false do |t|
-      t.integer :matiere_id
-      t.integer :user_id
+      t.belongs_to :matiere, index: true
+      t.belongs_to :user, index: true
     end
-    execute "ALTER TABLE matieres_users ADD PRIMARY KEY (matiere_id, user_id);"
   end
 end
