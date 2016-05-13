@@ -22,6 +22,12 @@ gem 'bootstrap-sass'
 # Use this gem for authentification
 gem 'devise'
 
+# Checking authorizations
+gem 'CanCanCan'
+
+# Handling roles
+gem 'rolify'
+
 # Use this gem for pretty devise forms
 gem 'devise-bootstrap-views'
 
