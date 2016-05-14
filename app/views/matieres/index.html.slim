@@ -5,6 +5,8 @@ table.table.table-bordered
     th Matière
     th Date de début
     th Date de fin
+    th Editer
+    th Supprimer
   - @matieres.each do |matiere|
     tr
       td
@@ -12,5 +14,25 @@ table.table.table-bordered
       		= matiere.titre
       td= matiere.date_debut
       td= matiere.date_fin
+      td#editTD
+      	a href="/matieres/edit?id=#{matiere.id}"
+      		span.glyphicon.glyphicon-pencil aria-hidden="true"
+      td#deleteTD
+        a data-toggle="modal" data-target="#modaleDeletion" data-id="#{matiere.id}"
+      		span.glyphicon.glyphicon-remove aria-hidden="true"
 
 a.btn.btn-default href="/matieres/new" Créer une nouvelle matière
+
+#modaleDeletion.modal.fade role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+        h4.modal-title Suppression de la matière
+      .modal-body
+        p Etes vous sûr de vouloir supprimer cette matière ?
+        p Cela supprimera également l'ensemble des épreuves et des notes associées.
+      .modal-footer
+        a.btn.btn-default data-dismiss="modal"  Annuler
+        a#deleteLink.btn.btn-danger href="#"  Supprimer

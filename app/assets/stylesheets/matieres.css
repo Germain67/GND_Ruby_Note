@@ -1,0 +1,7 @@
+td, th{
+	text-align: center !important;
+}
+
+#editTD, #deleteTD{
+	width: 0;
+}

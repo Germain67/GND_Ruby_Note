@@ -12,10 +12,10 @@ html
       nav.navbar.navbar-default
         .container-fluid
           .navbar-header
-            a href="/"
+            a#leftLogo href="/"
               = image_tag('icone_appli.png',width: "55",height: "50", alt: "Logo")
           .content
-            ul.nav.navbar-nav.navbar-right
+            ul.nav.navbar-nav.navbar-right#rightLogin
               - if user_signed_in?
                 li
                   = link_to('Déconnexion', destroy_user_session_path, :method => :delete)
@@ -38,15 +38,18 @@ html
                 #bs-example-navbar-collapse-1.collapse.navbar-collapse
                   ul.nav.navbar-nav
                     li
-                      a href="/dashboard/index"  Tableau de bord
+                      a href="/home/index"
+                        span.glyphicon.glyphicon-home aria-hidden="true"  Dashboard
                     li
-                      a href="/matieres/index"  Mes matières
+                      a href="/matieres/index" 
+                        span.glyphicon.glyphicon-th-list aria-hidden="true"  Matières
                     li
-                      a href="/epreuves/index"  Mes épreuves
+                      a href="/epreuves/index"  
+                        span.glyphicon.glyphicon-list-alt aria-hidden="true"  Epreuves
                     li
-                      a href="/help/index"  Aide
-                    li
-                      a href="/contact/index"  Contact
+                      a href="/contact/index" 
+                        span.glyphicon.glyphicon-envelope aria-hidden="true"  Contact
+
       .col-sm-10
         .container-fluid
           .row

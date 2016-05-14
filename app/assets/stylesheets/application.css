@@ -19,7 +19,7 @@
 # LESS
 *= require devise_bootstrap_views_less
 
- .float-none {
+.float-none {
   float: none;
 }
 
@@ -28,6 +28,14 @@
   h4 {
     margin: 0px;
   }
+}
+
+#rightLogin{
+  margin-right: 2em;
+}
+
+#leftLogo{
+  margin-left: 2em;
 }
 
 /* make sidebar nav vertical */ 

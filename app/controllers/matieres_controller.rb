@@ -38,8 +38,6 @@ class MatieresController < ApplicationController
   def destroy
     @matiere = Matiere.find(params[:id])
     @matiere.destroy
- 
-    redirect_to matieres_path
   end
  
   private

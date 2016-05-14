@@ -1,2 +1,10 @@
-h1 Epreuves#show
-p Find me in app/views/epreuves/show.html.slim
+.col-md-8
+	h2 Informations sur l'épreuve
+	- @epreuve
+    label for="epreuve"  Epreuve
+    p#epreuve #{@epreuve.titre}
+
+    label for="date"  Date
+    p#date #{@epreuve.date_examen}
+
+	a.btn.btn-default href="/epreuves/edit?id=#{@epreuve.id}" Editer cette épreuve

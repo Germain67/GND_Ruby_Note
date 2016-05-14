@@ -1,2 +1,9 @@
-p Bienvenue sur GDN
-p.btn-danger TODO : Inclure les formulaires login et register
+.row
+  .col-sm-4
+    h2 Matières
+    a href="/matieres/index" 
+      = image_tag('cours.jpg', alt: "Matieres", width: "180", height: "180")
+  .col-sm-4      
+    h2 Epreuves
+    a href="/epreuves/index" 
+      = image_tag('epreuves.png', alt: "Epreuves", width: "180", height: "180")
