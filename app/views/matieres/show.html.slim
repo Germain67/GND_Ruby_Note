@@ -1,2 +1,13 @@
-h1 Matieres#show
-p Find me in app/views/matieres/show.html.slim
+.col-md-8
+	h2 Informations sur la matière
+	- @matiere
+    label for="matiere"  Matière
+    p#matiere #{@matiere.titre}
+
+    label for="debut"  Début
+    p#debut #{@matiere.date_debut}
+
+    label for="fin"  Début
+    p#fin #{@matiere.date_fin}
+
+	a.btn.btn-default href="/matieres/edit?id=#{@matiere.id}" Editer cette matière

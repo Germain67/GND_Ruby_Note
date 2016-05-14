@@ -1,2 +1,25 @@
-h1 Matieres#new
-p Find me in app/views/matieres/new.html.slim
+.col-md-8
+	h2 Créer une nouvelle matière
+	form
+	  .form-group
+	    label for="matiere"  Matière
+	    input#matiere.form-control placeholder="Matière" type="text" /
+
+	  .form-group
+	    label for="datetimepicker"  Début
+	    #datetimepicker.input-group.date
+	      input.form-control type="text" /
+	      span.input-group-addon
+	        span.glyphicon.glyphicon-calendar
+	    javascript:
+	      $(function () { $('#datetimepicker').datetimepicker({ locale: 'fr'});});
+
+	  .form-group
+	    label for="datetimepicker2"  Fin
+	    #datetimepicker2.input-group.date
+	      input.form-control type="text" /
+	      span.input-group-addon
+	        span.glyphicon.glyphicon-calendar
+	    javascript:
+	      $(function () { $('#datetimepicker2').datetimepicker({ locale: 'fr'});});
+	  button.btn.btn-default type="submit"  Créer la matière

@@ -1,11 +1,16 @@
-h1 Listing articles
-table
+h1 Liste de vos matières
+
+table.table.table-bordered
   tr
-    th Nom matière
-    th Date début
-    th Date fin
+    th Matière
+    th Date de début
+    th Date de fin
   - @matieres.each do |matiere|
     tr
-      td= matiere.titre
+      td
+      	a href="/matieres/show?id=#{matiere.id}"
+      		= matiere.titre
       td= matiere.date_debut
       td= matiere.date_fin
+
+a.btn.btn-default href="/matieres/new" Créer une nouvelle matière

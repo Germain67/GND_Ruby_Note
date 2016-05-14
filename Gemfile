@@ -21,6 +21,8 @@ gem 'bootstrap-sass'
 gem "twitter-bootstrap-rails"
 # Use this gem for authentification
 gem 'devise'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 
 # Checking authorizations
 gem 'cancancan'

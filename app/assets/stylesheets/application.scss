@@ -1,3 +1,7 @@
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
  @import "bootstrap";
- @import "devise_bootstrap_views"
+ @import "devise_bootstrap_views";
+ // import bootstrap-sprockets before bootstrap if using bootstrap >= 3.2
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';

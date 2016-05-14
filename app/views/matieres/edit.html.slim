@@ -1,2 +1,40 @@
-h1 Matieres#edit
-p Find me in app/views/matieres/edit.html.slim
+.col-md-8
+	h2 Editer une matière
+	- @matiere
+	form
+	  .form-group
+	    label for="matiere"  Matière
+	    input#matiere.form-control placeholder="Matière" type="text" value="#{@matiere.titre}" /
+
+	  .form-group
+	    label for="datetimepicker"  Début
+	    #datetimepicker.input-group.date
+	      input.form-control type="text" /
+	      span.input-group-addon
+	        span.glyphicon.glyphicon-calendar
+	    javascript:
+	      $(function () { 
+	      	$('#datetimepicker').datetimepicker({ 
+	      		locale: 'fr', 
+	      		format: 'YYYY-MM-DD HH:mm:ss',
+					  defaultDate: "#{@matiere.date_debut}",
+					  allowInputToggle: true
+					 });
+	      });
+
+	  .form-group
+	    label for="datetimepicker2"  Fin
+	    #datetimepicker2.input-group.date
+	      input.form-control type="text" /
+	      span.input-group-addon
+	        span.glyphicon.glyphicon-calendar
+	    javascript:
+	      $(function () { 
+	      	$('#datetimepicker2').datetimepicker({ 
+	      		locale: 'fr', 
+	      		format: 'YYYY-MM-DD HH:mm:ss',
+					  defaultDate: "#{@matiere.date_fin}",
+					  allowInputToggle: true
+					 });
+	      });
+	  button.btn.btn-default type="submit"  Valider les modifications
