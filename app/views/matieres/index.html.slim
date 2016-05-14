@@ -1,10 +1,11 @@
 h1 Listing articles
 table
   tr
-    th Title
-    th Text
+    th Nom matière
+    th Date début
+    th Date fin
   - @matieres.each do |matiere|
     tr
       td= matiere.titre
-      td= matiere.periode
-
+      td= matiere.date_debut
+      td= matiere.date_fin
