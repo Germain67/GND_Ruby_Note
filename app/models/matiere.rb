@@ -1,4 +1,5 @@
 class Matiere < ActiveRecord::Base
+	resourcify
 	has_many :epreuve, :dependent => :delete_all
 	has_and_belongs_to_many :user
 	validates :titre, presence: true
