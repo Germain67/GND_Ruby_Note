@@ -7,4 +7,5 @@
     label for="date"  Date
     p#date #{@epreuve.date_examen}
 
-	a.btn.btn-default href="/epreuves/edit?id=#{@epreuve.id}" Editer cette épreuve
+	= link_to edit_epreufe_path(@epreuve) do
+		btn.btn.btn-default Editer cette épreuve

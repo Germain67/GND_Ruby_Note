@@ -1,31 +1,37 @@
 Rails.application.routes.draw do
-  get 'matieres/index'
 
-  get 'matieres/show'
+  resources :epreuves, :matieres
 
-  get 'matieres/new'
+  get 'matieres/index' => 'matieres#index'
 
-  get 'matieres/edit'
+  # le as: 'alias' permet de donner un alias, du coup dans tous les fichiers, on pourra accéder à cette méthode grâce à show_article_path
+  get 'matieres/show/:id' => 'matieres#show', as: 'show_matiere'
 
-  get 'matieres/create'
+  get 'matieres/new' => 'matieres#new'
 
-  get 'matieres/update'
+  get 'matieres/edit/:id' => 'matieres#edit'
 
-  get 'matieres/destroy'
+  get 'matieres/create' => 'matieres#create'
 
-  get 'epreuves/index'
+  get 'matieres/update' => 'matieres#update'
 
-  get 'epreuves/show'
+  get 'matieres/destroy' => 'matieres#destroy'
 
-  get 'epreuves/new'
+  get 'epreuves/index' => 'epreuves#index'
 
-  get 'epreuves/edit'
+  get 'epreuves/show/:id' => 'epreuves#show', as: 'show_epreuve'
 
-  get 'epreuves/create'
+  get 'epreuves/new' => 'epreuves#new'
 
-  get 'epreuves/update'
+  get 'epreuves/edit/:id' => 'epreuves#edit'
 
-  get 'epreuves/destroy'
+  get 'epreuves/create' => 'epreuves#create'
+
+  get 'epreuves/update' => 'epreuves#update'
+
+  get 'epreuves/destroy' => 'epreuves#destroy'
+
+
 
   devise_for :users
   get 'home/index'

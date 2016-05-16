@@ -29,8 +29,8 @@ user1.add_role "enseignant"
 # User etudiant
 user2 = User.new
 user2.email = 'etudiant@etudiant.com'
-user2.password = '2admin123'
-user2.password_confirmation = '2admin123'
+user2.password = 'etudiant123'
+user2.password_confirmation = 'etudiant123'
 user2.save!
 user2.add_role "etudiant"
 

@@ -10,12 +10,12 @@ table.table.table-bordered
   - @matieres.each do |matiere|
     tr
       td
-      	a href="/matieres/show?id=#{matiere.id}"
+      	= link_to show_matiere_path(matiere) do
       		= matiere.titre
       td= matiere.date_debut
       td= matiere.date_fin
       td#editTD
-      	a href="/matieres/edit?id=#{matiere.id}"
+        = link_to edit_matiere_path(matiere) do
       		span.glyphicon.glyphicon-pencil aria-hidden="true"
       td#deleteTD
         a data-toggle="modal" data-target="#modaleDeletion" data-id="#{matiere.id}"

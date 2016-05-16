@@ -1,23 +1,27 @@
-h1 Liste de vos épreuves
+- if can? :read, Epreuve
 
-table.table.table-bordered
-  tr
-    th Epreuve
-    th Date
-    th Editer
-    th Supprimer
-  - @epreuves.each do |epreuve|
+  h1 Liste de vos épreuves
+
+  table.table.table-bordered
     tr
-      td
-      	a href="/epreuves/show?id=#{epreuve.id}"
-      		= epreuve.titre
-      td= epreuve.date_examen
-      td#editTD
-      	a href="/epreuves/edit?id=#{epreuve.id}"
-      		span.glyphicon.glyphicon-pencil aria-hidden="true"
-      td#deleteTD
-        a data-toggle="modal" data-target="#modaleDeletion" data-id="#{epreuve.id}"
-      		span.glyphicon.glyphicon-remove aria-hidden="true"
+      th Epreuve
+      th Date
+      th Editer
+      th Supprimer
+    - @epreuves.each do |epreuve|
+      tr
+        td
+        	= link_to show_epreuve_path(epreuve) do
+        		= epreuve.titre
+        td= epreuve.date_examen
+        td#editTD
+        	= link_to edit_epreufe_path(epreuve) do
+        		span.glyphicon.glyphicon-pencil aria-hidden="true"
+        td#deleteTD
+          a data-toggle="modal" data-target="#modaleDeletion" data-id="#{epreuve.id}"
+        		span.glyphicon.glyphicon-remove aria-hidden="true"
+- else
+  h1 Vous ne pouvez pas voir les épreuves
 
 a.btn.btn-default href="/epreuves/new" Créer une nouvelle épreuve
 

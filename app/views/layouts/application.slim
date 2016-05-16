@@ -37,15 +37,12 @@ html
                     span.icon-bar
                 #bs-example-navbar-collapse-1.collapse.navbar-collapse
                   ul.nav.navbar-nav
-                    li
-                      a href="/home/index"
-                        span.glyphicon.glyphicon-home aria-hidden="true"  Dashboard
-                    li
-                      a href="/matieres/index" 
-                        span.glyphicon.glyphicon-th-list aria-hidden="true"  Matières
-                    li
-                      a href="/epreuves/index"  
-                        span.glyphicon.glyphicon-list-alt aria-hidden="true"  Epreuves
+                    li = link_to root_path do
+                      span.glyphicon.glyphicon-home aria-hidden="true"  Dashboard
+                    li = link_to matieres_path do
+                      span.glyphicon.glyphicon-th-list aria-hidden="true"  Matières
+                    li = link_to epreuves_path do
+                      span.glyphicon.glyphicon-list-alt aria-hidden="true"  Epreuves
                     li
                       a href="/contact/index" 
                         span.glyphicon.glyphicon-envelope aria-hidden="true"  Contact
