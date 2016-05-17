@@ -27,6 +27,9 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 # Checking authorizations
 gem 'cancancan'
 
+# Invite users to join the application
+gem 'devise_invitable'
+
 # Handling roles
 gem 'rolify'
 
