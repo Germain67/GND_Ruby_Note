@@ -43,9 +43,8 @@ html
                       span.glyphicon.glyphicon-th-list aria-hidden="true"  Matières
                     li = link_to epreuves_path do
                       span.glyphicon.glyphicon-list-alt aria-hidden="true"  Epreuves
-                    li
-                      a href="/contact/index" 
-                        span.glyphicon.glyphicon-envelope aria-hidden="true"  Contact
+                    li = link_to new_user_invitation_path do
+                        span.glyphicon.glyphicon-envelope aria-hidden="true"  Inviter
 
       .col-sm-10
         .container-fluid
