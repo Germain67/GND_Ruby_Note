@@ -6,10 +6,12 @@ class EpreuvesController < ApplicationController
       if ability.can? :view, Epreuve
         @epreuves = Epreuve.all
       else
-        render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+        flash[:error] = "Vous n'avez pas le droit de consulter la liste des épreuves"
+        redirect_to root_path
       end
     else
-      render(:file => File.join(Rails.root, 'public/not_sign_in.html'), :layout => false)
+      flash[:error] = "Vous devez vous connecter pour consulter la liste des épreuves"
+      redirect_to root_path
     end
   end
  

@@ -4,7 +4,18 @@ class MatieresController < ApplicationController
   end
  
   def show
-    @matiere = Matiere.find(params[:id])
+    if params[:id]
+      if user_signed_in?
+        ability  = Ability.new(current_user)
+        if ability.can? :view, Matiere
+          @matiere = Matiere.find(params[:id])
+        else
+          render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+        end
+      else
+        render(:file => File.join(Rails.root, 'public/not_sign_in.html'), :layout => false)
+      end
+    end
   end
  
   def new

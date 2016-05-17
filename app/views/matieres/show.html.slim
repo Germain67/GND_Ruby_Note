@@ -1,7 +1,7 @@
 .col-md-8
-	h2 Informations sur la matière
-	- @matiere
-    label for="matiere"  Matière
+  h2 Informations sur l'épreuve
+  - @matiere
+    label for="matiere"  Epreuve
     p#matiere #{@matiere.titre}
 
     label for="debut"  Début
@@ -10,4 +10,5 @@
     label for="fin"  Fin
     p#fin #{@matiere.date_fin}
 
-	a.btn.btn-default href="/matieres/edit?id=#{@matiere.id}" Editer cette matière
+  = link_to edit_matiere_path(@matiere)
+    .btn.btn-default Editer cette matiere

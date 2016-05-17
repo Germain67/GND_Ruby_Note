@@ -1,28 +1,25 @@
 .col-md-8
-	- if can? :manage, Epreuve
-	  h2 Editer une epreuve
-	  - @epreuve
-	  = form_for @epreuve, :url => {action: "update"} do |f|
-	    .form-group
-	      label for="epreuve"  Epreuve
-	      = f.text_field :titre, :class =>"form-control", :id =>"epreuve", :placeholder =>"Epreuve", :value=>"#{@epreuve.titre}"
+  h2 Editer une epreuve
+  - @epreuve
+  = form_for @epreuve, :url => {action: "update"} do |f|
+    .form-group
+      label for="epreuve"  Epreuve
+      = f.text_field :titre, :class =>"form-control", :id =>"epreuve", :placeholder =>"Epreuve", :value=>"#{@epreuve.titre}"
 
-	    .form-group
-	      label for="datetimepicker"  Début
-	      #datetimepicker.input-group.date
-	        = f.text_field :date_examen, :class =>"form-control"
-	        span.input-group-addon
-	          span.glyphicon.glyphicon-calendar
-	      javascript:
-	        $(function () { 
-	      	  $('#datetimepicker').datetimepicker({ 
-	      		  locale: 'fr', 
-	      		  format: 'YYYY-MM-DD',
-					    defaultDate: "#{@epreuve.date_examen}",
-					    allowInputToggle: true
-					   });
-	        });
+    .form-group
+      label for="datetimepicker"  Début
+      #datetimepicker.input-group.date
+        = f.text_field :date_examen, :class =>"form-control"
+        span.input-group-addon
+          span.glyphicon.glyphicon-calendar
+      javascript:
+        $(function () { 
+      	  $('#datetimepicker').datetimepicker({ 
+      		  locale: 'fr', 
+      		  format: 'YYYY-MM-DD',
+				    defaultDate: "#{@epreuve.date_examen}",
+				    allowInputToggle: true
+				   });
+        });
 
-	    = f.submit "Valider les modifications", :class => 'btn btn-default'
-	- else
-	  h2 Vous ne pouvez pas modifier d'épreuve.
+    = f.submit "Valider les modifications", :class => 'btn btn-default'

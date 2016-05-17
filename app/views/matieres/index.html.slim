@@ -21,7 +21,8 @@ table.table.table-bordered
         a data-toggle="modal" data-target="#modaleDeletion" data-id="#{matiere.id}"
       		span.glyphicon.glyphicon-remove aria-hidden="true"
 
-a.btn.btn-default href="/matieres/new" Créer une nouvelle matière
+= link_to matieres_new_path do
+  .btn.btn-default Créer une nouvelle matière
 
 #modaleDeletion.modal.fade role="dialog" tabindex="-1" 
   .modal-dialog

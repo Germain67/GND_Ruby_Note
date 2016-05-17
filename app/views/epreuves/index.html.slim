@@ -1,29 +1,32 @@
-- if can? :read, Epreuve
+h1 Liste de vos épreuves
 
-  h1 Liste de vos épreuves
-
-  table.table.table-bordered
+table.table.table-bordered
+  tr
+    th Epreuve
+    th Date
+    th Editer
+    th Supprimer
+  - @epreuves.each do |epreuve|
     tr
-      th Epreuve
-      th Date
-      th Editer
-      th Supprimer
-    - @epreuves.each do |epreuve|
-      tr
-        td
+      td
+        - if can? :manage, Epreuve
         	= link_to show_epreuve_path(epreuve) do
         		= epreuve.titre
-        td= epreuve.date_examen
+        - else
+          = epreuve.titre
+      td= epreuve.date_examen
+      - if can? :manage, Epreuve
         td#editTD
         	= link_to edit_epreufe_path(epreuve) do
         		span.glyphicon.glyphicon-pencil aria-hidden="true"
+      - if can? :manage, Epreuve
         td#deleteTD
           a data-toggle="modal" data-target="#modaleDeletion" data-id="#{epreuve.id}"
         		span.glyphicon.glyphicon-remove aria-hidden="true"
-- else
-  h1 Vous ne pouvez pas voir les épreuves
 
-a.btn.btn-default href="/epreuves/new" Créer une nouvelle épreuve
+- if can? :manage, Epreuve
+  = link_to epreuves_new_path do
+    .btn.btn-default Créer une nouvelle épreuve
 
 #modaleDeletion.modal.fade role="dialog" tabindex="-1" 
   .modal-dialog
