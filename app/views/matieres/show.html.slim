@@ -1,7 +1,7 @@
 .col-md-8
-  h2 Informations sur l'épreuve
-  - @matiere
-    label for="matiere"  Epreuve
+    h2 Informations sur la matière
+    - @matiere
+    label for="matiere"  Matiere
     p#matiere #{@matiere.titre}
 
     label for="debut"  Début
@@ -10,5 +10,6 @@
     label for="fin"  Fin
     p#fin #{@matiere.date_fin}
 
-  = link_to edit_matiere_path(@matiere)
-    .btn.btn-default Editer cette matiere
+    = link_to edit_matiere_path(@matiere)
+      .btn.btn-default Editer cette matiere
+    = button_to 'Supprimer cette matière', @matiere, :method => "delete", data: { confirm: 'Êtes vous sûrs de vouloir supprimer cette matière ?'}, class: "btn btn-default"

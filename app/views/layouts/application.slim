@@ -39,11 +39,14 @@ html
                   ul.nav.navbar-nav
                     li = link_to root_path do
                       span.glyphicon.glyphicon-home aria-hidden="true"  Dashboard
-                    li = link_to matieres_path do
-                      span.glyphicon.glyphicon-th-list aria-hidden="true"  Matières
-                    li = link_to epreuves_path do
-                      span.glyphicon.glyphicon-list-alt aria-hidden="true"  Epreuves
-                    li = link_to new_user_invitation_path do
+                    - if can? :view, Matiere
+                      li = link_to matieres_path do
+                        span.glyphicon.glyphicon-th-list aria-hidden="true"  Matières
+                    - if can? :view, Epreuve
+                      li = link_to epreuves_path do
+                        span.glyphicon.glyphicon-list-alt aria-hidden="true"  Epreuves
+                    - if can? :invite, User
+                      li = link_to new_user_invitation_path do
                         span.glyphicon.glyphicon-envelope aria-hidden="true"  Inviter
 
       .col-sm-10

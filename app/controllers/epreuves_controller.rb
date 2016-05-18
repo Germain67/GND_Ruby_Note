@@ -1,33 +1,46 @@
 class EpreuvesController < ApplicationController
   
-  def index
+  before_action :verif_pending
+  before_action :verif_signin
+
+  # on vérifie avant toute chose que l'user n'est pas un pending, si c'est le cas, on le redirige à la page d'accueil
+  def verif_pending
     if user_signed_in?
-      ability  = Ability.new(current_user)
-      if ability.can? :view, Epreuve
-        @epreuves = Epreuve.all
-      else
-        flash[:error] = "Vous n'avez pas le droit de consulter la liste des épreuves"
+      if current_user.has_role? :pending
+        flash[:error] = "Votre compte est en attente d'approbation par un administrateur. Vous ne pouvez pas accéder aux épreuves"
         redirect_to root_path
       end
+    end
+  end
+
+  def verif_signin
+    if !user_signed_in?
+        flash[:error] = "Vous n'êtes pas connecté"
+        redirect_to root_path
+    end
+  end
+
+  ################################## méthodes avec vues
+
+  def index
+    ability  = Ability.new(current_user)
+    if ability.can? :view, Epreuve
+      @epreuves = Epreuve.all
     else
-      flash[:error] = "Vous devez vous connecter pour consulter la liste des épreuves"
+      flash[:error] = "Vous n'avez pas le droit de consulter la liste des épreuves"
       redirect_to root_path
     end
   end
  
   def show
-    if params[:id]
-      if user_signed_in?
-        ability  = Ability.new(current_user)
-        if ability.can? :view, Epreuve
-          @epreuve = Epreuve.find(params[:id])
-        else
-          render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
-        end
-      else
-        render(:file => File.join(Rails.root, 'public/not_sign_in.html'), :layout => false)
-      end
+    ability  = Ability.new(current_user)
+    if ability.can? :view, Epreuve
+      @epreuve = Epreuve.find(params[:id])
+    else
+      flash[:error] = "Vous n'avez pas le droit de consulter cette épreuve"
+      redirect_to epreuves_path
     end
+
   end
  
   def new
@@ -39,46 +52,38 @@ class EpreuvesController < ApplicationController
   end
  
   def create
-    if user_signed_in?
-      ability  = Ability.new(current_user)
-      if ability.can? :manage, Epreuve
-        @epreuve = Epreuve.new(epreuve_params)
- 
-        if @epreuve.save
-          flash[:success] = "Epreuve créée avec succès."
-          redirect_to epreuves_path
-        else
-          flash[:error] = "Erreur lors de la création de l'épreuve."
-          redirect_to new_epreufe_path
-        end
-      else
-        flash[:error] = "Vous n'avez pas le droit de créer d'épreuve"
+    ability  = Ability.new(current_user)
+    if ability.can? :manage, Epreuve
+      @epreuve = Epreuve.new(epreuve_params)
+
+      if @epreuve.save
+        flash[:success] = "Epreuve créée avec succès."
         redirect_to epreuves_path
+      else
+        flash[:error] = "Erreur lors de la création de l'épreuve."
+        redirect_to new_epreufe_path
       end
     else
-      render(:file => File.join(Rails.root, 'public/not_sign_in.html'), :layout => false)
+      flash[:error] = "Vous n'avez pas le droit de créer d'épreuve"
+      redirect_to epreuves_path
     end
   end
  
   def update
-    if user_signed_in?
-      ability  = Ability.new(current_user)
-      if ability.can? :manage, Epreuve
-        @epreuve = Epreuve.find(params[:id])
- 
-        if @epreuve.update_attributes(epreuve_params)
-          flash[:success] = "Epreuve modifiée avec succès."
-          redirect_to epreuves_path
-        else
-          flash[:error] = "Erreur lors de la modification de l'épreuve."
-          redirect_to edit_epreufe_path(@epreuve)
-        end
-      else
-        flash[:error] = "Vous n'avez pas le droit de modifier d'épreuve"
+    ability  = Ability.new(current_user)
+    if ability.can? :manage, Epreuve
+      @epreuve = Epreuve.find(params[:id])
+
+      if @epreuve.update_attributes(epreuve_params)
+        flash[:success] = "Epreuve modifiée avec succès."
         redirect_to epreuves_path
+      else
+        flash[:error] = "Erreur lors de la modification de l'épreuve."
+        redirect_to edit_epreufe_path(@epreuve)
       end
     else
-      render(:file => File.join(Rails.root, 'public/not_sign_in.html'), :layout => false)
+      flash[:error] = "Vous n'avez pas le droit de modifier d'épreuve"
+      redirect_to epreuves_path
     end
   end
  

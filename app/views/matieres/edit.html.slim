@@ -1,15 +1,15 @@
 .col-md-8
 	h2 Editer une matière
 	- @matiere
-	form
+	= form_for @matiere, :url => {action: "update"} do |f|
 	  .form-group
 	    label for="matiere"  Matière
-	    input#matiere.form-control placeholder="Matière" type="text" value="#{@matiere.titre}" /
+	    = f.text_field :titre, :class =>"form-control", :id =>"matiere", :placeholder =>"Matiere", :value=>"#{@matiere.titre}"
 
 	  .form-group
 	    label for="datetimepicker"  Début
 	    #datetimepicker.input-group.date
-	      input.form-control type="text" /
+	      = f.text_field :date_debut, :class =>"form-control"
 	      span.input-group-addon
 	        span.glyphicon.glyphicon-calendar
 	    javascript:
@@ -25,7 +25,7 @@
 	  .form-group
 	    label for="datetimepicker2"  Fin
 	    #datetimepicker2.input-group.date
-	      input.form-control type="text" /
+	      = f.text_field :date_fin, :class =>"form-control"
 	      span.input-group-addon
 	        span.glyphicon.glyphicon-calendar
 	    javascript:
@@ -37,4 +37,4 @@
 					  allowInputToggle: true
 					 });
 	      });
-	  button.btn.btn-default type="submit"  Valider les modifications
+	  = f.submit "Valider les modifications", :class => 'btn btn-default'

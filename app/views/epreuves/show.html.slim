@@ -9,3 +9,5 @@
 
 	= link_to edit_epreufe_path(@epreuve) do
 		.btn.btn-default Editer cette épreuve
+
+	= button_to 'Supprimer cette épreuve', @epreuve, :method => "delete", data: { confirm: 'Êtes vous sûrs de vouloir supprimer cette épreuve ?'}, class: "btn btn-default"

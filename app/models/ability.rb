@@ -11,6 +11,8 @@ class Ability
     elsif user.has_role? :etudiant
         can :view, Matiere
         can :view, Epreuve
+    elsif user.has_role? :pending
+        can :wait, User
     end
 
     # Define abilities for the passed in user here. For example:

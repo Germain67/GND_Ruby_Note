@@ -7,4 +7,11 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_create :default_role
+
+  private
+  def default_role
+    self.roles << Role.where(:name => 'pending').first
+  end
+
 end
