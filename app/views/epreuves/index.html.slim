@@ -21,23 +21,7 @@ table.table.table-bordered
         		span.glyphicon.glyphicon-pencil aria-hidden="true"
       - if can? :manage, Epreuve
         td#deleteTD
-          a data-toggle="modal" data-target="#modaleDeletion" data-id="#{epreuve.id}"
-        		span.glyphicon.glyphicon-remove aria-hidden="true"
-
+          = link_to glyph(:remove), epreuves_destroy_path(epreuve), :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
 - if can? :manage, Epreuve
   = link_to epreuves_new_path do
     .btn.btn-default Créer une nouvelle épreuve
-
-#modaleDeletion.modal.fade role="dialog" tabindex="-1" 
-  .modal-dialog
-    .modal-content
-      .modal-header
-        button.close aria-label="Close" data-dismiss="modal" type="button" 
-          span aria-hidden="true"  &times;
-        h4.modal-title Suppression de l'épreuve
-      .modal-body
-        p Etes vous sûr de vouloir supprimer cette épreuve ?
-        p Cela supprimera également l'ensemble des notes associées.
-      .modal-footer
-        a.btn.btn-default data-dismiss="modal"  Annuler
-        a#deleteLink.btn.btn-danger href="#"  Supprimer

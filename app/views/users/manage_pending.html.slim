@@ -20,4 +20,4 @@ table.table.table-bordered
       td
         = link_to glyph(:ok), accept_user_path(user), :method => "post"
       td
-        = link_to glyph(:remove), delete_user_path(user), :method => "delete", data: { confirm: 'Êtes vous sûr de vouloir supprimer cet Utilisateur ?'}
+        = link_to glyph(:remove), delete_user_path(user), :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cet utilisateur ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}

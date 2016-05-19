@@ -18,11 +18,4 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require moment/fr
-$(document).ready(function(){
-	$('#modaleDeletion').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget);
-	  var id = button.data('id');
-	 	var modal = $(this);
-	  modal.find('#deleteLink').attr('href','/matieres/destroy?id=' + id);
-	});
-});
+//= require data-confirm-modal

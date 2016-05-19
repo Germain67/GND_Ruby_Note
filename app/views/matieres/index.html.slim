@@ -18,22 +18,7 @@ table.table.table-bordered
         = link_to edit_matiere_path(matiere) do
       		span.glyphicon.glyphicon-pencil aria-hidden="true"
       td#deleteTD
-        a data-toggle="modal" data-target="#modaleDeletion" data-id="#{matiere.id}"
-      		span.glyphicon.glyphicon-remove aria-hidden="true"
-
-= link_to matieres_new_path do
-  .btn.btn-default Créer une nouvelle matière
-
-#modaleDeletion.modal.fade role="dialog" tabindex="-1" 
-  .modal-dialog
-    .modal-content
-      .modal-header
-        button.close aria-label="Close" data-dismiss="modal" type="button" 
-          span aria-hidden="true"  &times;
-        h4.modal-title Suppression de la matière
-      .modal-body
-        p Etes vous sûr de vouloir supprimer cette matière ?
-        p Cela supprimera également l'ensemble des épreuves et des notes associées.
-      .modal-footer
-        a.btn.btn-default data-dismiss="modal"  Annuler
-        a#deleteLink.btn.btn-danger href="#"  Supprimer
+        = link_to glyph(:remove), matieres_destroy_path(matiere), :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
+- if can? :manage, Matiere
+  = link_to matieres_new_path do
+    .btn.btn-default Créer une nouvelle matière
