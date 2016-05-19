@@ -8,7 +8,7 @@
 
     .form-group
       label for="matiere"  Matière
-      = f.select(:matiere_id, options_from_collection_for_select(@listeMatieres, 'id', 'titre'), {}, {:class =>"form-control", :id =>"matiere", :placeholder =>"Matière"})
+      = f.select(:matiere_id, options_from_collection_for_select(@listeMatieres, 'id', 'titre', @epreuve.matiere_id), {}, {:class =>"form-control", :id =>"matiere", :placeholder =>"Matière"})
 
     .form-group
       label for="datetimepicker"  Début
