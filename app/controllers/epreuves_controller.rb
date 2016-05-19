@@ -25,7 +25,28 @@ class EpreuvesController < ApplicationController
   def index
     ability  = Ability.new(current_user)
     if ability.can? :view, Epreuve
-      @epreuves = Epreuve.all
+      if current_user.has_role? :etudiant
+        # Un élève ne peut voir que les épreuves où il a participé, pas les autres.
+        @epreuves = Array.new
+        @notations = Notation.where("user_id = '"+current_user.id.to_s+"'")
+        @notations.each do |notation|
+          epreuve = Epreuve.find(notation.epreuve_id)
+          epreuve.note = notation.note
+          @epreuves.push(epreuve)
+        end
+      elsif current_user.has_role? :enseignant
+        # Un enseignant ne peut voir que les épreuves de ses matières.
+        @epreuves = Array.new
+        @notations = Notation.where("user_id = '"+current_user.id.to_s+"'")
+        @notations.each do |notation|
+          epreuve = Epreuve.find(notation.epreuve_id)
+          epreuve.note = notation.note
+          @epreuves.push(epreuve)
+        end
+      else
+        # Un admin peut voir toutes les épreuves
+        @epreuves = Epreuve.all
+      end
     else
       flash[:error] = "Vous n'avez pas le droit de consulter la liste des épreuves"
       redirect_to root_path

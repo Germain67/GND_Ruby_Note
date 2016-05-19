@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517102615) do
+ActiveRecord::Schema.define(version: 20160519183011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,14 +25,6 @@ ActiveRecord::Schema.define(version: 20160517102615) do
   end
 
   add_index "epreuves", ["matiere_id"], name: "index_epreuves_on_matiere_id", using: :btree
-
-  create_table "epreuves_users", id: false, force: :cascade do |t|
-    t.integer "epreuve_id"
-    t.integer "user_id"
-  end
-
-  add_index "epreuves_users", ["epreuve_id"], name: "index_epreuves_users_on_epreuve_id", using: :btree
-  add_index "epreuves_users", ["user_id"], name: "index_epreuves_users_on_user_id", using: :btree
 
   create_table "matieres", force: :cascade do |t|
     t.string   "titre"
@@ -49,6 +41,16 @@ ActiveRecord::Schema.define(version: 20160517102615) do
 
   add_index "matieres_users", ["matiere_id"], name: "index_matieres_users_on_matiere_id", using: :btree
   add_index "matieres_users", ["user_id"], name: "index_matieres_users_on_user_id", using: :btree
+
+  create_table "notations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "epreuve_id"
+    t.integer  "note"
+  end
+
+  add_index "notations", ["user_id", "epreuve_id"], name: "index_notations_on_user_id_and_epreuve_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

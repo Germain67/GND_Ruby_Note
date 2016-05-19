@@ -5,8 +5,12 @@ table.table.table-bordered
   tr
     th Epreuve
     th Date
-    th Editer
-    th Supprimer
+    - if current_user.has_role? :etudiant
+    th Note
+    - if can? :manage, Epreuve
+      th Editer
+    - if can? :manage, Epreuve
+      th Supprimer
   - @epreuves.each do |epreuve|
     tr
       td
@@ -16,6 +20,7 @@ table.table.table-bordered
         - else
           = epreuve.titre
       td= epreuve.date_examen
+      td= epreuve.note
       - if can? :manage, Epreuve
         td#editTD
         	= link_to edit_epreufe_path(epreuve) do

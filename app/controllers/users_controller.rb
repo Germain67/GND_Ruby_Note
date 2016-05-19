@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   before_action :verif_pending
+  before_action :verif_signin
 
   # on vérifie avant toute chose que l'user n'est pas un pending, si c'est le cas, on le redirige à la page d'accueil
   def verif_pending
@@ -10,6 +11,13 @@ class UsersController < ApplicationController
         flash[:error] = "Votre compte est en attente d'approbation par un administrateur. Vous ne pouvez pas inviter d'étudiants"
         redirect_to root_path
       end
+    end
+  end
+
+  def verif_signin
+    if !user_signed_in?
+        flash[:error] = "Vous n'êtes pas connecté"
+        redirect_to root_path
     end
   end
 
