@@ -32,6 +32,8 @@ class EpreuvesController < ApplicationController
         @notations.each do |notation|
           epreuve = Epreuve.find(notation.epreuve_id)
           epreuve.note = notation.note
+          matiere = Matiere.find(epreuve.matiere_id)
+          epreuve.titre_matiere = matiere.titre
           @epreuves.push(epreuve)
         end
       elsif current_user.has_role? :enseignant
@@ -41,11 +43,18 @@ class EpreuvesController < ApplicationController
         @notations.each do |notation|
           epreuve = Epreuve.find(notation.epreuve_id)
           epreuve.note = notation.note
+          matiere = Matiere.find(epreuve.matiere_id)
+          epreuve.titre_matiere = matiere.titre
           @epreuves.push(epreuve)
         end
       else
         # Un admin peut voir toutes les épreuves
-        @epreuves = Epreuve.all
+        @epreuves = Array.new
+        Epreuve.all.each do |epreuve|
+          matiere = Matiere.find(epreuve.matiere_id)
+          epreuve.titre_matiere = matiere.titre
+          @epreuves.push(epreuve)
+        end
       end
     else
       flash[:error] = "Vous n'avez pas le droit de consulter la liste des épreuves"

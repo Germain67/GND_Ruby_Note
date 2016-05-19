@@ -4,9 +4,10 @@
 table.table.table-bordered
   tr
     th Epreuve
+    th Matière
     th Date
     - if current_user.has_role? :etudiant
-    th Note
+      th Note
     - if can? :manage, Epreuve
       th Editer
     - if can? :manage, Epreuve
@@ -19,8 +20,10 @@ table.table.table-bordered
         		= epreuve.titre
         - else
           = epreuve.titre
+      td= epreuve.titre_matiere
       td= epreuve.date_examen
-      td= epreuve.note
+      - if current_user.has_role? :etudiant
+        td= epreuve.note
       - if can? :manage, Epreuve
         td#editTD
         	= link_to edit_epreufe_path(epreuve) do
