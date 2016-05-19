@@ -66,6 +66,7 @@ class EpreuvesController < ApplicationController
  
   def new
     @epreuve = Epreuve.new
+    @listeMatieres = Matiere.all
   end
  
   def edit

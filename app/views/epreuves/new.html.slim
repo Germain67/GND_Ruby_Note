@@ -5,7 +5,11 @@
       label for="epreuve"  Epreuve
       = f.text_field :titre, :class =>"form-control", :id =>"epreuve", :placeholder =>"Epreuve"
 
-	    .form-group
+    .form-group
+      label for="matiere"  Matière
+      = f.select(:matiere_id, options_from_collection_for_select(@listeMatieres, 'id', 'titre'), {}, {:class =>"form-control", :id =>"matiere", :placeholder =>"Matière"})
+
+    .form-group
       label for="datetimepicker"  Date
       #datetimepicker.input-group.date
         = f.text_field :date_examen, :class =>"form-control"
