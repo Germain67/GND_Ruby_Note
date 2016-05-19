@@ -25,7 +25,12 @@ class MatieresController < ApplicationController
   def index
     ability  = Ability.new(current_user)
     if ability.can? :view, Matiere
-      @matieres = Matiere.all
+      @matieres = Array.new
+      @appartenances = Appartenance.where("user_id = '"+current_user.id.to_s+"'")
+      @appartenances.each do |appartenance|
+          matiere = Matiere.find(appartenance.matiere_id)
+          @matieres.push(matiere)
+      end
     else
       flash[:error] = "Vous n'avez pas le droit de consulter la liste des matières"
       redirect_to root_path

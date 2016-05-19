@@ -6,8 +6,9 @@ table.table.table-bordered
     th Matière
     th Date de début
     th Date de fin
-    th Editer
-    th Supprimer
+    - if can? :manage, Matiere
+      th Editer
+      th Supprimer
   - @matieres.each do |matiere|
     tr
       td
@@ -15,11 +16,13 @@ table.table.table-bordered
       		= matiere.titre
       td= matiere.date_debut
       td= matiere.date_fin
-      td#editTD
-        = link_to edit_matiere_path(matiere) do
-      		span.glyphicon.glyphicon-pencil aria-hidden="true"
-      td#deleteTD
-        = link_to glyph(:remove), matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
+
+      - if can? :manage, Matiere
+        td#editTD
+          = link_to edit_matiere_path(matiere) do
+        		span.glyphicon.glyphicon-pencil aria-hidden="true"
+        td#deleteTD
+          = link_to glyph(:remove), matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
 - if can? :manage, Matiere
   = link_to matieres_new_path do
     .btn.btn-default Créer une nouvelle matière

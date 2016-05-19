@@ -24,12 +24,12 @@
                     td= etudiant.nom
                     td= etudiant.prenom
                     td= etudiant.email
+    - if can? :manage, Matiere
+        #btnContainer
+          = link_to edit_matiere_path(@matiere)
+              .btn_row.btn.btn-info Editer cette matière
 
-    #btnContainer
-      = link_to edit_matiere_path(@matiere)
-          .btn_row.btn.btn-info Editer cette matière
-
-      = link_to 'Supprimer cette matière', @matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette matière ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
+          = link_to 'Supprimer cette matière', @matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette matière ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
 
     = link_to matieres_path
         #return.btn.btn-default Retour à la liste des matières
