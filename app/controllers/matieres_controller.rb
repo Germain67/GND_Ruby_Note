@@ -24,7 +24,9 @@ class MatieresController < ApplicationController
 
   def index
     ability  = Ability.new(current_user)
-    if ability.can? :view, Matiere
+    if current_user.has_role? "admin"
+      @matieres = Matiere.all
+    elsif ability.can? :view, Matiere
       @matieres = Array.new
       @appartenances = Appartenance.where("user_id = '"+current_user.id.to_s+"'")
       @appartenances.each do |appartenance|
