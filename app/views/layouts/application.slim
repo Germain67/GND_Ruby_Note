@@ -18,6 +18,9 @@ html
             ul.nav.navbar-nav.navbar-right#rightLogin
               - if user_signed_in?
                 li
+                  p Connecté en tant que 
+                  p #{current_user.nom}
+                  p #{current_user.prenom}
                   = link_to('Déconnexion', destroy_user_session_path, :method => :delete)
               - else
                 li
