@@ -5,3 +5,13 @@ td, th{
 #editTD, #deleteTD{
 	width: 0;
 }
+
+.btn_row{
+	margin-top: 2em;
+	display: inline;
+}
+
+#return{
+	margin-top: 2em;
+	display: block;
+}

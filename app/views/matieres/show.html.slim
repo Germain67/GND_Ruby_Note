@@ -1,15 +1,21 @@
 .col-md-8
-    h2 Informations sur la matière
+    .page-header
+        h2 Informations sur la matière
     - @matiere
-    label for="matiere"  Matiere
-    p#matiere #{@matiere.titre}
+    h3 Matiere
+    span.label.label-default #{@matiere.titre}
 
-    label for="debut"  Début
-    p#debut #{@matiere.date_debut}
+    h3 Début
+    span.label.label-default #{@matiere.date_debut}
 
-    label for="fin"  Fin
-    p#fin #{@matiere.date_fin}
+    h3 Fin
+    span.label.label-default #{@matiere.date_fin}
 
-    = link_to edit_matiere_path(@matiere)
-      .btn.btn-default Editer cette matiere
-    = button_to 'Supprimer cette matière', @matiere, :method => "delete", data: { confirm: 'Êtes vous sûrs de vouloir supprimer cette matière ?'}, class: "btn btn-default"
+    #btnContainer
+      = link_to edit_matiere_path(@matiere)
+          .btn_row.btn.btn-info Editer cette matière
+
+      = link_to 'Supprimer cette matière', @matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette matière ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
+
+    = link_to matieres_path
+        #return.btn.btn-default Retour à la liste des matières

@@ -1,16 +1,21 @@
 .col-md-8
-	h2 Informations sur l'utilisateur
-	- @user
-    label for="nom"  Nom
-    p#user #{@user.nom}
+    .page-header
+        h2 Informations sur l'utilisateur
+    - @user
+    h3 Nom
+    span.label.label-default #{@user.nom}
 
-    label for="prenom"  Prénom
-    p#prenom #{@user.prenom}
+    h3 Prenom
+    span.label.label-default #{@user.prenom}
 
-    label for="email"  Email
-    p#email #{@user.email}
+    h3 Email
+    span.label.label-default #{@user.email}
 
-    label for="rôle"  Fonction
-    p#fonction #{@user.nom_role}
+    h3 Fonction
+    span.label.label-default #{@user.nom_role}
 
-	= button_to 'Supprimer cet utilisateur', delete_user_path(@user), :method => "delete", data: { confirm: 'Êtes vous sûr de vouloir supprimer cet Utilisateur ?'}, class: "btn btn-default"
+    #btnContainer
+        = button_to 'Supprimer cet utilisateur', delete_user_path(@user), :method => "delete", data: { confirm: 'Êtes vous sûr de vouloir supprimer cet Utilisateur ?', commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
+
+    = link_to users_index_path
+        #return.btn.btn-default Retour à la liste des utilisateurs

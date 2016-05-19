@@ -1,13 +1,18 @@
 .col-md-8
-	h2 Informations sur l'épreuve
-	- @epreuve
-    label for="epreuve"  Epreuve
-    p#epreuve #{@epreuve.titre}
+    .page-header
+        h2 Informations sur l'épreuve
+    - @epreuve
+    h3 Epreuve
+    span.label.label-default #{@epreuve.titre}
 
-    label for="date"  Date
-    p#date #{@epreuve.date_examen}
+    h3 Date
+    span.label.label-default #{@epreuve.date_examen}
 
-	= link_to edit_epreufe_path(@epreuve) do
-		.btn.btn-default Editer cette épreuve
+    #btnContainer
+      = link_to edit_matiere_path(@epreuve)
+          .btn_row.btn.btn-info Editer cette épreuve
 
-	= button_to 'Supprimer cette épreuve', @epreuve, :method => "delete", data: { confirm: 'Êtes vous sûrs de vouloir supprimer cette épreuve ?'}, class: "btn btn-default"
+      = link_to 'Supprimer cette épreuve', @epreuve, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
+
+    = link_to epreuves_path
+        #return.btn.btn-default Retour à la liste des épreuves
