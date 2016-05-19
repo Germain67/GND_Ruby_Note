@@ -19,7 +19,7 @@ table.table.table-bordered
         = link_to edit_matiere_path(matiere) do
       		span.glyphicon.glyphicon-pencil aria-hidden="true"
       td#deleteTD
-        = link_to glyph(:remove), matieres_destroy_path(matiere), :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
+        = link_to glyph(:remove), matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
 - if can? :manage, Matiere
   = link_to matieres_new_path do
     .btn.btn-default Créer une nouvelle matière

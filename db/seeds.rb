@@ -17,7 +17,6 @@ user3.prenom = 'enseigner'
 user3.email = 'pending@pending.com'
 user3.password = 'pending123'
 user3.password_confirmation = 'pending123'
-user3.add_role "pending"
 user3.save!
 
 

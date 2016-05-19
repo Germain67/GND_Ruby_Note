@@ -22,7 +22,7 @@ table.table.table-bordered
         		span.glyphicon.glyphicon-pencil aria-hidden="true"
       - if can? :manage, Epreuve
         td#deleteTD
-          = link_to glyph(:remove), epreuves_destroy_path(epreuve), :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
+          = link_to glyph(:remove), epreuve, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}
 - if can? :manage, Epreuve
   = link_to epreuves_new_path do
     .btn.btn-default Créer une nouvelle épreuve

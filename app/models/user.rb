@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 
   private
   def default_role
-    self.roles << Role.where(:name => 'pending').first
+    #self.roles << Role.where(:name => 'pending').first
+    self.add_role "pending"
   end
 
 end

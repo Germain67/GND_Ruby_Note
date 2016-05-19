@@ -17,5 +17,8 @@
     #btnContainer
         = button_to 'Supprimer cet utilisateur', delete_user_path(@user), :method => "delete", data: { confirm: 'Êtes vous sûr de vouloir supprimer cet Utilisateur ?', commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
 
+        - if @user.has_role? :pending
+          = button_to 'Accepter cet utilisateur', accept_user_path(@user), :method => "post", class: "btn btn-success btn_row pull-right"
+
     = link_to users_index_path
         #return.btn.btn-default Retour à la liste des utilisateurs
