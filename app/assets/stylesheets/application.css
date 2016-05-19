@@ -38,6 +38,20 @@
   margin-left: 2em;
 }
 
+#editTD, #deleteTD{
+  width: 0;
+}
+
+.btn_row{
+  margin-top: 2em;
+  display: inline;
+}
+
+#return{
+  margin-top: 2em;
+  display: block;
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
 
