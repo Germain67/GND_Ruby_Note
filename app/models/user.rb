@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :matiere
 	has_many :notations
   has_many :epreuves, :through => :notations
+  has_many :appartenances
+  has_many :matieres, :through => :appartenances
   attr_accessor :nom_role
   attr_reader :raw_invitation_token
   # Include default devise modules. Others available are:

@@ -128,7 +128,7 @@ class EpreuvesController < ApplicationController
 
   private
     def epreuve_params
-      params.require(:epreuve).permit(:titre, :date_examen)
+      params.require(:epreuve).permit(:titre, :date_examen, :matiere_id)
     end
  
 end

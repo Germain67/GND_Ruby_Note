@@ -54,6 +54,12 @@ user2.save!
 user2.add_role "etudiant"
 user2.remove_role "pending"
 
+# On créé des appartenances entre matières et user
+appartenance1 = Appartenance.new
+appartenance1.user_id = user1.id
+appartenance1.matiere_id = matieres.first.id
+appartenance1.save!
+
 # On créé des notes fictives
 note1 = Notation.new
 note1.user_id = user2.id
@@ -61,7 +67,6 @@ note1.epreuve_id = epreuve1.id
 note1.note = '18'
 note1.save!
 
-# On créé des notes fictives
 note2 = Notation.new
 note2.user_id = user2.id
 note2.epreuve_id = epreuve2.id

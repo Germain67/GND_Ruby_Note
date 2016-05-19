@@ -9,7 +9,7 @@
     span.label.label-default #{@epreuve.date_examen}
 
     #btnContainer
-      = link_to edit_matiere_path(@epreuve)
+      = link_to edit_epreufe_path(@epreuve)
           .btn_row.btn.btn-info Editer cette épreuve
 
       = link_to 'Supprimer cette épreuve', @epreuve, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette épreuve ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"

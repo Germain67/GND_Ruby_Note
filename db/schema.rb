@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519183011) do
+ActiveRecord::Schema.define(version: 20160519210225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appartenances", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "matiere_id"
+  end
+
+  add_index "appartenances", ["user_id", "matiere_id"], name: "index_appartenances_on_user_id_and_matiere_id", using: :btree
 
   create_table "epreuves", force: :cascade do |t|
     t.string   "titre"
@@ -33,14 +42,6 @@ ActiveRecord::Schema.define(version: 20160519183011) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "matieres_users", id: false, force: :cascade do |t|
-    t.integer "matiere_id"
-    t.integer "user_id"
-  end
-
-  add_index "matieres_users", ["matiere_id"], name: "index_matieres_users_on_matiere_id", using: :btree
-  add_index "matieres_users", ["user_id"], name: "index_matieres_users_on_user_id", using: :btree
 
   create_table "notations", force: :cascade do |t|
     t.datetime "created_at", null: false
