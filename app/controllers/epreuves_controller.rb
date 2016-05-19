@@ -57,6 +57,7 @@ class EpreuvesController < ApplicationController
     ability  = Ability.new(current_user)
     if ability.can? :view, Epreuve
       @epreuve = Epreuve.find(params[:id])
+      @matiere = Matiere.find(@epreuve.matiere_id)
     else
       flash[:error] = "Vous n'avez pas le droit de consulter cette épreuve"
       redirect_to epreuves_path
@@ -71,6 +72,7 @@ class EpreuvesController < ApplicationController
  
   def edit
     @epreuve = Epreuve.find(params[:id])
+    @listeMatieres = Matiere.all
   end
  
   def create
