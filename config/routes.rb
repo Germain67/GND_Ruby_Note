@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
 
+  namespace :users do
+  get 'invitations/new'
+  end
+
+  namespace :users do
+  get 'invitations/create'
+  end
+
+  namespace :users do
+  get 'invitations/edit'
+  end
+
+  namespace :users do
+  get 'invitations/update'
+  end
+
   resources :epreuves, :matieres
+
+  ######## ROUTES MATIERES
 
   get 'matieres/index' => 'matieres#index'
 
@@ -9,7 +27,7 @@ Rails.application.routes.draw do
 
   get 'matieres/new' => 'matieres#new'
 
-  get 'matieres/edit/:id' => 'matieres#edit'
+  get 'matieres/edit/:id(.:format)' => 'matieres#edit'
 
   get 'matieres/create' => 'matieres#create'
 
@@ -17,13 +35,15 @@ Rails.application.routes.draw do
 
   get 'matieres/destroy' => 'matieres#destroy'
 
+  ######### ROUTES EPREUVES
+
   get 'epreuves/index' => 'epreuves#index'
 
-  get 'epreuves/show/:id' => 'epreuves#show', as: 'show_epreuve'
+  get 'epreuves/show/:id(.:format)' => 'epreuves#show', as: 'show_epreuve'
 
   get 'epreuves/new' => 'epreuves#new'
 
-  get 'epreuves/edit/:id' => 'epreuves#edit'
+  get 'epreuves/edit/:id(.:format)' => 'epreuves#edit'
 
   get 'epreuves/create' => 'epreuves#create'
 
@@ -31,10 +51,26 @@ Rails.application.routes.draw do
 
   get 'epreuves/destroy' => 'epreuves#destroy'
 
+  ######### ROUTES USERS
+
+  get 'users/index' => 'users#index'
+
+  get 'users/manage_pending' => 'users#manage_pending', as: 'manage_pending'
+
+  get 'users/manage_all' => 'users#manage_all', as: 'manage_all'
+
+  get 'users/show/:id(.:format)' => 'users#show', as: 'show_user'
+
+  delete 'users/destroy/:id(.:format)' => 'users#destroy', as: 'delete_user'
+
+  post 'users/accept/:id(.:format)' =>  'users#accept', as: 'accept_user'
 
 
-  devise_for :users, :controllers => { :invitations => 'user' }
+
+  devise_for :users, :controllers => { :invitations => 'users/invitations' }
+
   get 'home/index'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

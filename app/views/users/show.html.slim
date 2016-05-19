@@ -1,0 +1,16 @@
+.col-md-8
+	h2 Informations sur l'utilisateur
+	- @user
+    label for="nom"  Nom
+    p#user #{@user.nom}
+
+    label for="prenom"  Prénom
+    p#prenom #{@user.prenom}
+
+    label for="email"  Email
+    p#email #{@user.email}
+
+    label for="rôle"  Fonction
+    p#fonction #{@user.nom_role}
+
+	= button_to 'Supprimer cet utilisateur', delete_user_path(@user), :method => "delete", data: { confirm: 'Êtes vous sûr de vouloir supprimer cet Utilisateur ?'}, class: "btn btn-default"

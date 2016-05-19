@@ -88,10 +88,20 @@ class EpreuvesController < ApplicationController
   end
  
   def destroy
-    @epreuve = Epreuve.find(params[:id])
-    @epreuve.destroy
- 
-    redirect_to epreuves_path
+    ability  = Ability.new(current_user)
+    if ability.can? :manage, Epreuve
+      @epreuve = Epreuve.find(params[:id])
+      if @epreuve.destroy
+        flash[:success] = "Épreuve supprimée avec succès."
+        redirect_to epreuves_path
+      else
+        flash[:error] = "Erreur lors de la suppression de l'épreuve."
+        redirect_to edit_epreufe_path(@epreuve)
+      end
+    else
+      flash[:error] = "Vous n'avez pas le droit de supprimer d'épreuve'"
+      redirect_to epreuves_path
+    end
   end
 
   private

@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   rolify
 	has_and_belongs_to_many :matiere
 	has_and_belongs_to_many :epreuve
+  attr_accessor :nom_role
+  attr_reader :raw_invitation_token
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,

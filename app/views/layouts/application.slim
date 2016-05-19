@@ -48,6 +48,12 @@ html
                     - if can? :invite, User
                       li = link_to new_user_invitation_path do
                         span.glyphicon.glyphicon-envelope aria-hidden="true"  Inviter
+                    - if can? :manage, User
+                      li = link_to manage_all_path do
+                        span.glyphicon.glyphicon-user aria-hidden="true"  Utilisateurs
+                    - if can? :manage, User
+                      li = link_to manage_pending_path do
+                        span.glyphicon.glyphicon-hourglass aria-hidden="true"  Demandes
 
       .col-sm-10
         .container-fluid

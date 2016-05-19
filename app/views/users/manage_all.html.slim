@@ -1,0 +1,22 @@
+h1 Liste des utilisateurs inscrits
+
+table.table.table-bordered
+  tr
+    th Id
+    th Nom
+    th Prénom
+    th Email
+    th Fonction
+    th Supprimer
+  - @users.each do |user|
+    tr
+      td
+        - if can? :manage, User
+          = link_to show_user_path(user) do
+            = user.id
+      td= user.nom
+      td= user.prenom
+      td= user.email
+      td= user.nom_role
+      td
+        = link_to glyph(:remove), delete_user_path(user), :method => "delete", data: { confirm: 'Êtes vous sûr de vouloir supprimer cet Utilisateur ?'}
