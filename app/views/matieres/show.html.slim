@@ -11,6 +11,20 @@
     h3 Fin
     span.label.label-default #{@matiere.date_fin}
 
+    h3 Liste des étudiants
+    table.table.table-bordered
+        tr
+            th Nom
+            th Prénom
+            th Mail
+
+        - @users.each do |etudiant|
+            -if etudiant.has_role? "etudiant"
+                tr
+                    td= etudiant.nom
+                    td= etudiant.prenom
+                    td= etudiant.email
+
     #btnContainer
       = link_to edit_matiere_path(@matiere)
           .btn_row.btn.btn-info Editer cette matière

@@ -36,6 +36,7 @@ class MatieresController < ApplicationController
     ability  = Ability.new(current_user)
     if ability.can? :view, Matiere
       @matiere = Matiere.find(params[:id])
+      @users = User.all
     else
       flash[:error] = "Vous n'avez pas le droit de consulter cette épreuve"
       redirect_to matieres_path
