@@ -64,7 +64,7 @@
 #maDiv{
   text-align: center;
 }
-#maDiv h4, .row p{
+#maDiv h4, #maDiv p{
   display: inline;
   margin-left: 0.5em;
 }
