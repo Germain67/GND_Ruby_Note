@@ -15,16 +15,16 @@ __________
 
 ## Comptes pré-créés : 
 
-Compte admin : admin@admin.com / admin123
-Compte enseignant : enseignant@enseignant.com / enseignant123
-Comptes étudiants : etudiant@etudiant.com / etudiant123 -- etudiant1@etudiant.com / etudiant123 -- ... jusqu'à étudiant6
-Compte pending : pending@pending.com / pending123
+- Compte admin : admin@admin.com / admin123
+- Compte enseignant : enseignant@enseignant.com / enseignant123
+- Comptes étudiants : etudiant@etudiant.com / etudiant123 -- etudiant1@etudiant.com / etudiant123 -- ... jusqu'à étudiant6
+- Compte pending : pending@pending.com / pending123
 
 __________ 
 
 ## Fonctions non implémentées :
-Gestion de la saisie de fonctions des Epreuves dans l'url
-Un formulaire pour noter les étudiants avec un seul bouton pour tout valider (actuellement en place : un bouton par élève)
+- Gestion de la saisie de fonctions des Epreuves dans l'url
+- Un formulaire pour noter les étudiants avec un seul bouton pour tout valider (actuellement en place : un bouton par élève)
 
 __________
 
