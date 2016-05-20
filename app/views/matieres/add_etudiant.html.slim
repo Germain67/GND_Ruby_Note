@@ -11,6 +11,7 @@
         th Ajouter
 
     - @newstudents.each do |etudiant|
+      -if etudiant.has_role? "etudiant"
         tr
           td= etudiant.nom
           td= etudiant.prenom
