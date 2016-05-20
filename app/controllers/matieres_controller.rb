@@ -159,15 +159,32 @@ class MatieresController < ApplicationController
   end
  
   def remove_etudiant
-    ability  = Ability.new(current_user)
+    ability = Ability.new(current_user)
     if ability.can? :manage, Matiere
-      @matiere = Matiere.find(params[:matiere_id])
-      @appartenances = Appartenance.where(matiere_id: params[:matiere_id], user_id: params[:user_id])
-      @appartenances.each do |appartenance|
-        appartenance.destroy
+      @matiere = Matiere.find_by_id(params[:matiere_id])
+      if @matiere
+        removeduser = User.find_by_id(params[:user_id])
+        if removeduser
+          if removeduser.has_role? "etudiant"
+            @appartenances = Appartenance.where(matiere_id: params[:matiere_id], user_id: params[:user_id])
+            @appartenances.each do |appartenance|
+              @appartenance.destroy
+            end
+            flash[:success] = "Etudiant retiré avec succès."
+            redirect_to show_matiere_path(@matiere)
+          else
+            flash[:error] = "L'utilisateur que vous désirez retirer n'est pas un étudiant."
+            redirect_to show_matiere_path(@matiere)
+          end
+        else
+          flash[:error] = "L'étudiant que vous essayez de retirer n'existe pas."
+          redirect_to show_matiere_path(@matiere)
+        end
+        @newstudents = User.where("id NOT IN (?)", @students)
+      else
+        flash[:error] = "La matière n'existe pas."
+        redirect_to matieres_path
       end
-      flash[:success] = "Etudiant retiré avec succès."
-      redirect_to show_matiere_path(@matiere)
     else
       flash[:error] = "Vous n'avez pas le droit de retirer d'étudiants à cette matière."
       redirect_to matieres_path
