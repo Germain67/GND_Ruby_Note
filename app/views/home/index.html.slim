@@ -19,7 +19,7 @@
 	= bootstrap_devise_error_messages!
 	.panel.panel-default.devise-bs
 	  .panel-heading
-	    h4= t('.sign_in', :default => "Sign in")
+	    h4= t('.sign_in', :default => "Connexion")
 	  .panel-body
 	    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f|
 	      .form-group
@@ -32,7 +32,7 @@
 	        .checkbox
 	          = f.label :remember_me do
 	            = f.check_box :remember_me
-	            | remember me
-	      = f.submit  t('.sign_in', :default => "Sign in"), class: "btn btn-primary"
+	            | Rester connecté
+	      = f.submit  t('.sign_in', :default => "Connexion"), class: "btn btn-primary"
 	= render "devise/shared/links"
 

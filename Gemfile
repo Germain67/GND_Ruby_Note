@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use this for windows
 gem 'coffee-script-source', '1.10.0'
 # gem 'therubyracer', platforms: :ruby
+gem 'devise-i18n'
 
 # Use Twitter Bootstrap SASS
 gem 'bootstrap-sass'
