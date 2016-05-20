@@ -166,7 +166,7 @@ class MatieresController < ApplicationController
         if removeduser.has_role? "etudiant"
           @appartenances = Appartenance.where(matiere_id: params[:matiere_id], user_id: params[:user_id])
           @appartenances.each do |appartenance|
-            @appartenance.destroy
+            appartenance.destroy
           end
           flash[:success] = "Etudiant retiré avec succès."
           redirect_to show_matiere_path(@matiere)

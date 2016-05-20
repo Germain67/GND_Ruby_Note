@@ -53,7 +53,7 @@ Rails.application.routes.draw do
 
   get 'epreuves/add_note/:id(.:format)' => 'epreuves#add_note', as: 'add_note_epreuve'
 
-  get 'epreuves/validate_note/:epreuve_id(.:format).:user_id(.:format)' => 'epreuves#validate_note', as: 'validate_note_epreuve'
+  post 'epreuves/validate_note/:epreuve_id(.:format).:user_id(.:format)' => 'epreuves#validate_note', as: 'validate_note_epreuve'
 
   get 'epreuves/create' => 'epreuves#create'
 

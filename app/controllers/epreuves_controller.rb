@@ -179,12 +179,23 @@ class EpreuvesController < ApplicationController
     ability  = Ability.new(current_user)
     if ability.can? :manage, Epreuve
       @epreuve = Epreuve.find(params[:epreuve_id])
-      notation = Notation.new 
-      notation.user_id = params[:user_id]
-      notation.epreuve_id = params[:epreuve_id]
-      notation.save!
-      flash[:success] = "Note enregistrée avec succès."
-      redirect_to add_note_epreuve_path(@epreuve)
+      notation = Notation.where(epreuve_id: params[:epreuve_id], user_id: params[:user_id]).first
+      if notation
+        if notation.update_attributes(notation_params)
+          flash[:success] = "Note modifiée avec succès."
+          redirect_to add_note_epreuve_path(@epreuve)
+        else
+          flash[:error] = "Problème lors de la modification de la note."
+          redirect_to add_note_epreuve_path(@epreuve)
+        end
+      else
+        notation = Notation.new(params.permit(:note)) 
+        notation.user_id = params[:user_id]
+        notation.epreuve_id = params[:epreuve_id]
+        notation.save!
+        flash[:success] = "Note enregistrée avec succès."
+        redirect_to add_note_epreuve_path(@epreuve)
+      end
     else
       flash[:error] = "Vous n'avez pas le droit d'enregistrer des notes."
       redirect_to epreuves_path
@@ -194,6 +205,10 @@ class EpreuvesController < ApplicationController
   private
     def epreuve_params
       params.require(:epreuve).permit(:titre, :date_examen, :matiere_id)
+    end
+
+    def notation_params
+      params.permit(:epreuve_id, :matiere_id, :note)
     end
  
 end
