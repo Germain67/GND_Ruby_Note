@@ -1,0 +1,24 @@
+.col-md-8
+  h2 Ajouter des étudiants
+
+  h3 #{@matiere.titre}
+
+  table.table.table-bordered
+    tr
+        th Nom
+        th Prénom
+        th Mail
+        th Ajouter
+
+    - @newstudents.each do |etudiant|
+        tr
+          td= etudiant.nom
+          td= etudiant.prenom
+          td= etudiant.email
+          td#addTD
+            = link_to validate_add_matiere_path(@matiere, etudiant) do
+              span.glyphicon.glyphicon-ok aria-hidden="true"
+
+  - if can? :manage, Matiere
+    = link_to show_matiere_path(@matiere)
+        #return.btn.btn-default Retour à la matière

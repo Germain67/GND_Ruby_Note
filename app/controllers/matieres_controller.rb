@@ -70,6 +70,10 @@ class MatieresController < ApplicationController
 
       if @matiere.save
         flash[:success] = "Matière créée avec succès."
+        appartenance = Appartenance.new 
+        appartenance.user_id = current_user.id 
+        appartenance.matiere_id = @matiere.id 
+        appartenance.save!
         redirect_to matieres_path
       else
         flash[:error] = "Erreur lors de la création de la matière."
@@ -115,7 +119,50 @@ class MatieresController < ApplicationController
       redirect_to matieres_path
     end
   end
+
+  def add_etudiant
+    @matiere = Matiere.find(params[:id])
+    @students = Array.new
+    @appartenances = Appartenance.where("matiere_id = '"+ params[:id] +"'")
+    @appartenances.each do |appartenance|
+        student = User.find(appartenance.user_id)
+        @students.push(student)
+    end
+    @newstudents = User.where("id NOT IN (?)", @students)
+  end
+
+  def validate_add
+    ability  = Ability.new(current_user)
+    if ability.can? :manage, Matiere
+      @matiere = Matiere.find(params[:matiere_id])
+      appartenance = Appartenance.new 
+      appartenance.user_id = params[:user_id]
+      appartenance.matiere_id = params[:matiere_id]
+      appartenance.save!
+      flash[:success] = "Etudiant ajouté avec succès."
+      redirect_to add_etudiant_matiere_path(@matiere)
+    else
+      flash[:error] = "Vous n'avez pas le droit d'ajouter d'étudiants à cette matière."
+      redirect_to matieres_path
+    end
+  end
  
+  def remove_etudiant
+    ability  = Ability.new(current_user)
+    if ability.can? :manage, Matiere
+      @matiere = Matiere.find(params[:matiere_id])
+      @appartenances = Appartenance.where(matiere_id: params[:matiere_id], user_id: params[:user_id])
+      @appartenances.each do |appartenance|
+        appartenance.destroy
+      end
+      flash[:success] = "Etudiant retiré avec succès."
+      redirect_to show_matiere_path(@matiere)
+    else
+      flash[:error] = "Vous n'avez pas le droit de retirer d'étudiants à cette matière."
+      redirect_to matieres_path
+    end
+  end
+
   private
     def matiere_params
       params.require(:matiere).permit(:titre, :date_debut, :date_fin)

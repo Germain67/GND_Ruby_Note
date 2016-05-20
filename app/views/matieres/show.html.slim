@@ -12,11 +12,13 @@
     span.label.label-default #{@matiere.date_fin}
 
     h3 Liste des étudiants
+
     table.table.table-bordered
         tr
             th Nom
             th Prénom
             th Mail
+            th Retirer
 
         - @users.each do |etudiant|
             -if etudiant.has_role? "etudiant"
@@ -24,10 +26,17 @@
                     td= etudiant.nom
                     td= etudiant.prenom
                     td= etudiant.email
+                    td#editTD
+                      = link_to remove_etudiant_matiere_path(@matiere, etudiant) do
+                            span.glyphicon.glyphicon-remove aria-hidden="true"
+
     - if can? :manage, Matiere
         #btnContainer
           = link_to edit_matiere_path(@matiere)
               .btn_row.btn.btn-info Editer cette matière
+
+          = link_to add_etudiant_matiere_path(@matiere)
+              .btn_row.btn.btn-success Ajouter des étudiants
 
           = link_to 'Supprimer cette matière', @matiere, :method => "delete", data: {confirm: "Etes vous sûr de vouloir supprimer cette matière ?", commit: "Supprimer", cancel: "Annuler", title: "Confirmation"}, class: "btn btn-danger btn_row pull-right"
 

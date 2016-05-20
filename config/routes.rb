@@ -29,6 +29,12 @@ Rails.application.routes.draw do
 
   get 'matieres/edit/:id(.:format)' => 'matieres#edit'
 
+  get 'matieres/add_etudiant/:id(.:format)' => 'matieres#add_etudiant', as: 'add_etudiant_matiere'
+
+  get 'matieres/validate_add/:matiere_id(.:format).:user_id(.:format)' => 'matieres#validate_add', as: 'validate_add_matiere'
+
+  get 'matieres/remove_etudiant/:matiere_id(.:format).:user_id(.:format)' => 'matieres#remove_etudiant', as: 'remove_etudiant_matiere'
+
   get 'matieres/create' => 'matieres#create'
 
   get 'matieres/update' => 'matieres#update'
