@@ -31,6 +31,7 @@
 }
 
 #rightLogin{
+  margin-top: 15px;
   margin-right: 2em;
 }
 
@@ -50,6 +51,10 @@
 #return{
   margin-top: 2em;
   display: block;
+}
+
+#rightLogin li p, #rightLogin li a{
+  display: inline;
 }
 
 /* make sidebar nav vertical */ 
