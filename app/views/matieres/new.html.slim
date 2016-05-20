@@ -22,5 +22,13 @@
 	      span.input-group-addon
 	        span.glyphicon.glyphicon-calendar
 	    javascript:
-	      $(function () { $('#datetimepicker2').datetimepicker({ locale: 'fr', format: 'YYYY-MM-DD'});});
+	      $(function () { 
+		      $('#datetimepicker2').datetimepicker({ locale: 'fr', format: 'YYYY-MM-DD'});
+		      $("#datetimepicker").on("dp.change", function (e) {
+			    	$('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+			  	});
+				  $("#datetimepicker2").on("dp.change", function (e) {
+				  	$('#datetimepicker').data("DateTimePicker").maxDate(e.date);
+				  });
+			  });
 	  = f.submit "Créer la matière", :class => 'btn btn-default'
