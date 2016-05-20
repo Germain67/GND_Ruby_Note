@@ -57,6 +57,10 @@
   display: inline;
 }
 
+#panelDiv{
+  margin-top: 25px;
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
 

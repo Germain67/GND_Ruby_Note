@@ -1,5 +1,6 @@
 .col-md-8
-	h2 Créer une nouvelle matière
+	.page-header
+		h2 Créer une nouvelle matière
 	= form_for @matiere, :url => {action: "create"}, method: :post do |f|
 	  .form-group
 	    label for="matiere"  Matière

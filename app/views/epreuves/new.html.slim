@@ -1,5 +1,6 @@
 .col-md-8
-  h2 Créer une nouvelle épreuve
+  .page-header
+    h2 Créer une nouvelle épreuve
   = form_for @epreuve, :url => {action: "create"}, method: :post do |f|
     .form-group
       label for="epreuve"  Epreuve
