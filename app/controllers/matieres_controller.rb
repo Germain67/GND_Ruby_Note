@@ -57,6 +57,9 @@ class MatieresController < ApplicationController
     @matiere = Matiere.find_by_id(params[:id])
     if @matiere
       authorizeduser = false
+      if current_user.has_role? :admin
+        authorizeduser = true
+      end
       @appartenances = Appartenance.where("matiere_id = '"+ params[:id] +"'")
       @appartenances.each do |appartenance|
         if appartenance.user_id == current_user.id

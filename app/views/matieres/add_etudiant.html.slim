@@ -18,7 +18,7 @@
           td= etudiant.email
           td#addTD
             = link_to validate_add_matiere_path(@matiere, etudiant) do
-              glyphicon.glyphicon-ok
+              span.glyphicon.glyphicon-ok aria-hidden="true"
 
   - if can? :manage, Matiere
     = link_to show_matiere_path(@matiere)
