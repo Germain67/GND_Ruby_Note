@@ -121,14 +121,19 @@ class MatieresController < ApplicationController
   end
 
   def add_etudiant
-    @matiere = Matiere.find(params[:id])
-    @students = Array.new
-    @appartenances = Appartenance.where("matiere_id = '"+ params[:id] +"'")
-    @appartenances.each do |appartenance|
+    @matiere = Matiere.find_by_id(params[:id])
+    if @matiere
+      @students = Array.new
+      @appartenances = Appartenance.where("matiere_id = '"+ params[:id] +"'")
+      @appartenances.each do |appartenance|
         student = User.find(appartenance.user_id)
         @students.push(student)
+      end
+      @newstudents = User.where("id NOT IN (?)", @students)
+    else
+      flash[:error] = "La matière n'existe pas."
+      redirect_to matieres_path
     end
-    @newstudents = User.where("id NOT IN (?)", @students)
   end
 
   def validate_add
