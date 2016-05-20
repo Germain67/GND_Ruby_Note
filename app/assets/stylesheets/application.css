@@ -61,6 +61,14 @@
   margin-top: 25px;
 }
 
+#maDiv{
+  text-align: center;
+}
+#maDiv h4, .row p{
+  display: inline;
+  margin-left: 0.5em;
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
 

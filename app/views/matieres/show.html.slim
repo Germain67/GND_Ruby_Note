@@ -1,44 +1,36 @@
 .page-header
     h2 Informations sur la matière
 - @matiere
-.container
-    .row
-        #leftDiv.col-xs-2
-            h3 Matiere
-            h4
-                span.label.label-default #{@matiere.titre}
+#maDiv
+    h3
+        span.label.label-default  #{@matiere.titre} 
+    .row                     
+        span.glyphicon.glyphicon-calendar aria-hidden="true"
+        p #{@matiere.date_debut.strftime('%d %b %Y')} - #{@matiere.date_fin.strftime('%d %b %Y')}
 
-            h3 Début
-            h4 
-                span.label.label-default #{@matiere.date_debut}
+#panelDiv.panel.panel-default
+    .panel-heading
+        h3.panel-title Liste des étudiants
+    .panel-body
+        table.table.table-bordered
+            tr
+                th Nom
+                th Prénom
+                th Mail
+                th Retirer
 
-            h3 Fin
-            h4
-                span.label.label-default #{@matiere.date_fin}
-        .col-xs-5
-            #panelDiv.panel.panel-default
-                .panel-heading
-                    h3.panel-title Liste des étudiants
-                .panel-body
-                    table.table.table-bordered
-                        tr
-                            th Nom
-                            th Prénom
-                            th Mail
-                            th Retirer
-
-                        - @users.each do |etudiant|
-                            -if etudiant.has_role? "etudiant"
-                                tr
-                                    td= etudiant.nom
-                                    td= etudiant.prenom
-                                    td= etudiant.email
-                                    td#editTD
-                                      = link_to remove_etudiant_matiere_path(@matiere, etudiant) do
-                                            span.glyphicon.glyphicon-remove aria-hidden="true"
-                    - if can? :manage, Matiere
-                        = link_to add_etudiant_matiere_path(@matiere)
-                            .btn_row.btn.btn-default.pull-right Ajouter des étudiants
+            - @users.each do |etudiant|
+                -if etudiant.has_role? "etudiant"
+                    tr
+                        td= etudiant.nom
+                        td= etudiant.prenom
+                        td= etudiant.email
+                        td#editTD
+                          = link_to remove_etudiant_matiere_path(@matiere, etudiant) do
+                                span.glyphicon.glyphicon-remove aria-hidden="true"
+        - if can? :manage, Matiere
+            = link_to add_etudiant_matiere_path(@matiere)
+                .btn_row.btn.btn-default.pull-right Ajouter des étudiants
 
 
 
