@@ -135,12 +135,18 @@ class MatieresController < ApplicationController
     ability  = Ability.new(current_user)
     if ability.can? :manage, Matiere
       @matiere = Matiere.find(params[:matiere_id])
-      appartenance = Appartenance.new 
-      appartenance.user_id = params[:user_id]
-      appartenance.matiere_id = params[:matiere_id]
-      appartenance.save!
-      flash[:success] = "Etudiant ajouté avec succès."
-      redirect_to add_etudiant_matiere_path(@matiere)
+      addeduser = User.find_by_id(params[:user_id])
+      if addeduser
+        appartenance = Appartenance.new 
+        appartenance.user_id = params[:user_id]
+        appartenance.matiere_id = params[:matiere_id]
+        appartenance.save!
+        flash[:success] = "Etudiant ajouté avec succès."
+        redirect_to add_etudiant_matiere_path(@matiere)
+      else
+        flash[:error] = "L'étudiant ajouté n'existe pas."
+        redirect_to show_matiere_path(@matiere)
+      end
     else
       flash[:error] = "Vous n'avez pas le droit d'ajouter d'étudiants à cette matière."
       redirect_to matieres_path
