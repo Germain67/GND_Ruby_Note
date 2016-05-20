@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :appartenances
   has_many :matieres, :through => :appartenances
   attr_accessor :nom_role
+  attr_accessor :note
   attr_reader :raw_invitation_token
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

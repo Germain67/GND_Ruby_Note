@@ -76,12 +76,30 @@ class EpreuvesController < ApplicationController
  
   def new
     @epreuve = Epreuve.new
-    @listeMatieres = Matiere.all
+    if current_user.has_role? :admin
+      @listeMatieres = Matiere.all
+    else
+      @listeMatieres = Array.new
+      appartenances = Appartenance.where(user_id: current_user.id)
+      appartenances.each do |appartenance|
+        matiere = Matiere.find(appartenance.matiere_id)
+        @listeMatieres.push(matiere)
+      end
+    end
   end
  
   def edit
     @epreuve = Epreuve.find(params[:id])
-    @listeMatieres = Matiere.all
+    if current_user.has_role? :admin
+      @listeMatieres = Matiere.all
+    else
+      @listeMatieres = Array.new
+      appartenances = Appartenance.where(user_id: current_user.id)
+      appartenances.each do |appartenance|
+        matiere = Matiere.find(appartenance.matiere_id)
+        @listeMatieres.push(matiere)
+      end
+    end
   end
  
   def create
@@ -91,6 +109,10 @@ class EpreuvesController < ApplicationController
 
       if @epreuve.save
         flash[:success] = "Epreuve créée avec succès."
+        notation = Notation.new 
+        notation.user_id = current_user.id 
+        notation.epreuve_id = @epreuve.id 
+        notation.save!
         redirect_to epreuves_path
       else
         flash[:error] = "Erreur lors de la création de l'épreuve."
@@ -133,6 +155,38 @@ class EpreuvesController < ApplicationController
       end
     else
       flash[:error] = "Vous n'avez pas le droit de supprimer d'épreuve'"
+      redirect_to epreuves_path
+    end
+  end
+
+  def add_note
+    @epreuve = Epreuve.find(params[:id])
+    # @students va contenir la liste des étudiants qui ont cette matière
+    @students = Array.new
+    @appartenances = Appartenance.where(matiere_id: @epreuve.matiere_id)
+    @appartenances.each do |appartenance|
+        student = User.find(appartenance.user_id)
+        # on récupère la note s'il en a une
+        @notations = Notation.where(epreuve_id: @epreuve.id, user_id: student.id)
+        @notations.each do |notation|
+          student.note = notation.note
+        end
+        @students.push(student)
+    end
+  end
+
+  def validate_note
+    ability  = Ability.new(current_user)
+    if ability.can? :manage, Epreuve
+      @epreuve = Epreuve.find(params[:epreuve_id])
+      notation = Notation.new 
+      notation.user_id = params[:user_id]
+      notation.epreuve_id = params[:epreuve_id]
+      notation.save!
+      flash[:success] = "Note enregistrée avec succès."
+      redirect_to add_note_epreuve_path(@epreuve)
+    else
+      flash[:error] = "Vous n'avez pas le droit d'enregistrer des notes."
       redirect_to epreuves_path
     end
   end
